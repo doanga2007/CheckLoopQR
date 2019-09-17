@@ -21,3 +21,4 @@ C:\Users\508382\Documents\Visual Studio 2013\Projects\CheckLoopQR\CheckLoopQR\bi
 C:\Users\508382\Documents\Visual Studio 2013\Projects\CheckLoopQR\CheckLoopQR\obj\Debug\CheckLoopQR.csprojResolveAssemblyReference.cache
 C:\Users\508382\Documents\Visual Studio 2013\Projects\CheckLoopQR\CheckLoopQR\obj\Debug\CheckLoopQR.dll
 C:\Users\508382\Documents\Visual Studio 2013\Projects\CheckLoopQR\CheckLoopQR\obj\Debug\CheckLoopQR.pdb
+C:\Users\tum\Documents\Visual Studio 2013\Projects\CheckLoopQR\CheckLoopQR\obj\Debug\CheckLoopQR.csprojResolveAssemblyReference.cache

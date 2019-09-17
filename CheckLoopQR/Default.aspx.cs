@@ -29,6 +29,11 @@ namespace CheckLoopQR
         }
         protected void btnGenerate_Click(object sender, EventArgs e)
         {
+			if (CheckBox1.SelectedItem == null)
+            {
+                Response.Redirect("Default.aspx");
+            }
+			
             string code = CheckBox1.SelectedItem.Text;
 
             CheckBox1.Visible = false;
