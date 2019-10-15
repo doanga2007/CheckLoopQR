@@ -5,6 +5,7 @@ using ZXing.Common;
 using ZXing;
 using ZXing.QrCode;
 using System.Web.UI.WebControls;
+using System.Web.UI.HtmlControls;
 
 namespace CheckLoopQR
 {
@@ -12,7 +13,7 @@ namespace CheckLoopQR
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            this.checkTextAll.Text = " Check All";
         }
         protected void btnSelect_Click(object sender, EventArgs e)
         {
@@ -33,39 +34,55 @@ namespace CheckLoopQR
             {
                 Response.Redirect("Default.aspx");
             }
-			
-            string code = CheckBox1.SelectedItem.Text;
 
-            CheckBox1.Visible = false;
-
-            QrCodeEncodingOptions options = new QrCodeEncodingOptions();
-
-            options = new QrCodeEncodingOptions
+            foreach (ListItem listItem in CheckBox1.Items)
             {
-                DisableECI = true,
-                CharacterSet = "UTF-8",
-                Width = 150,
-                Height = 150,
-                Margin = 0,
-            };
-
-            var barcodeWriter = new BarcodeWriter();
-            barcodeWriter.Format = BarcodeFormat.QR_CODE;
-            barcodeWriter.Options = options;
-
-            System.Web.UI.WebControls.Image imgBarCode = new System.Web.UI.WebControls.Image();
-            imgBarCode.Height = 150;
-            imgBarCode.Width = 150;
-
-            using (Bitmap bitMap = barcodeWriter.Write(code))
-            {
-                using (MemoryStream ms = new MemoryStream())
+                if (listItem.Selected)
                 {
-                    bitMap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
-                    byte[] byteImage = ms.ToArray();
-                    imgBarCode.ImageUrl = "data:image/png;base64," + Convert.ToBase64String(byteImage);
+                    string code = listItem.Text;
+
+                    CheckBox1.Visible = false;
+                    checkAll.Visible = false;
+                    checkTextAll.Visible = false;
+
+                    QrCodeEncodingOptions options = new QrCodeEncodingOptions();
+
+                    options = new QrCodeEncodingOptions
+                    {
+                        DisableECI = true,
+                        CharacterSet = "UTF-8",
+                        Width = 150,
+                        Height = 150,
+                        Margin = 0,
+                    };
+
+                    var barcodeWriter = new BarcodeWriter();
+                    barcodeWriter.Format = BarcodeFormat.QR_CODE;
+                    barcodeWriter.Options = options;
+
+                    System.Web.UI.WebControls.Image imgBarCode = new System.Web.UI.WebControls.Image();
+                    imgBarCode.Height = 150;
+                    imgBarCode.Width = 150;
+
+                    using (Bitmap bitMap = barcodeWriter.Write(code))
+                    {
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            bitMap.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                            byte[] byteImage = ms.ToArray();
+                            imgBarCode.ImageUrl = "data:image/png;base64," + Convert.ToBase64String(byteImage);
+                        }
+                        PlaceHolder1.Controls.Add(imgBarCode);
+                        PlaceHolder1.Controls.Add(new HtmlGenericControl("br"));
+                        lblvalues.Text += "Selected Item Text : " + listItem.Text + "<br />";
+                        lblvalues2.Text += "Selected Item Text : " + listItem.Text + "<br />";
+                        lblvalues3.Text += "Selected Item Text : " + listItem.Text + "<br />";
+                    }
                 }
-                PlaceHolder1.Controls.Add(imgBarCode);
+                else
+                {
+                    //do something else 
+                }
             }
         }
     }
