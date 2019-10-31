@@ -19,7 +19,6 @@
 
     });
     </script>
-
 </head>
 <body>
     <form id="form1" runat="server">
@@ -42,9 +41,6 @@
             <asp:Button ID="btnSelect" runat="server" CssClass="btn btn-secondary" Text="Display Text" OnClick="btnSelect_Click" /><br /><br />
 
             <asp:PlaceHolder ID="PlaceHolder1" runat="server"></asp:PlaceHolder>
-            <asp:Label ID="lblvalues" runat="server" Font-Size="Large"></asp:Label>
-            <asp:Label id="lblvalues2" runat="server" Font-Size="Large"></asp:Label>
-            <asp:Label id="lblvalues3" runat="server" Font-Size="Large"></asp:Label>
 
             <asp:CheckBox ID="checkAll" runat="server" Font-Size="Large"/><asp:Label id="checkTextAll" runat="server" Font-Size="Large"></asp:Label><br /><br />
 

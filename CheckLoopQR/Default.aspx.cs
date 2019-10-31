@@ -22,7 +22,7 @@ namespace CheckLoopQR
 
             int i;
 
-            for (i = 1; i < 11; i++)
+            for (i = 1; i < 4; i++)
             {
                 num += i;
                 CheckBox1.Items.Add(new ListItem(" " + num));
@@ -35,10 +35,15 @@ namespace CheckLoopQR
                 Response.Redirect("Default.aspx");
             }
 
+            string[] texture = { "Selected Item Text1 : ", "Selected Item Text2 : ", "Selected Item Text3 : " };
+            int a = 0;
+
             foreach (ListItem listItem in CheckBox1.Items)
             {
                 if (listItem.Selected)
                 {
+                    a++;
+
                     string code = listItem.Text;
 
                     CheckBox1.Visible = false;
@@ -64,6 +69,16 @@ namespace CheckLoopQR
                     imgBarCode.Height = 150;
                     imgBarCode.Width = 150;
 
+                    Label lblvalues = new Label();
+                    lblvalues.Text += texture[a-1] + listItem.Text;
+                    lblvalues.Font.Size = FontUnit.Large;
+                    Label lblvalues2 = new Label();
+                    lblvalues2.Text += texture[a-1] + listItem.Text;
+                    lblvalues2.Font.Size = FontUnit.Large;
+                    Label lblvalues3 = new Label();
+                    lblvalues3.Text += texture[a-1] + listItem.Text;
+                    lblvalues3.Font.Size = FontUnit.Large;
+
                     using (Bitmap bitMap = barcodeWriter.Write(code))
                     {
                         using (MemoryStream ms = new MemoryStream())
@@ -74,9 +89,12 @@ namespace CheckLoopQR
                         }
                         PlaceHolder1.Controls.Add(imgBarCode);
                         PlaceHolder1.Controls.Add(new HtmlGenericControl("br"));
-                        lblvalues.Text += "Selected Item Text : " + listItem.Text + "<br />";
-                        lblvalues2.Text += "Selected Item Text : " + listItem.Text + "<br />";
-                        lblvalues3.Text += "Selected Item Text : " + listItem.Text + "<br />";
+                        PlaceHolder1.Controls.Add(lblvalues);
+                        PlaceHolder1.Controls.Add(new HtmlGenericControl("br"));
+                        PlaceHolder1.Controls.Add(lblvalues2);
+                        PlaceHolder1.Controls.Add(new HtmlGenericControl("br"));
+                        PlaceHolder1.Controls.Add(lblvalues3);
+                        PlaceHolder1.Controls.Add(new HtmlGenericControl("br"));
                     }
                 }
                 else
